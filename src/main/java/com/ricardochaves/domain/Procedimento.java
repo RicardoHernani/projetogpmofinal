@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Procedimento implements Serializable {
@@ -16,23 +18,17 @@ public class Procedimento implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private String id;
 	
-	
 	private Integer matricula;
-	
-	
 	private Date data;
-	
 	private Integer tipo;
 	private Integer premio;
-	
-	
 	private String codigo;
 	
+	@ManyToOne
+	@JoinColumn(name="usuario_id")
+	private Usuario usuario;
 	
 	private Referencia referencia;
-	
-	
-	private Usuario usuario;
 	
 	public Procedimento() {
 	}
@@ -48,7 +44,7 @@ public class Procedimento implements Serializable {
 		this.referencia = referencia;
 		this.usuario = usuario;
 	}
-
+	
 	public String getId() {
 		return id;
 	}
@@ -73,16 +69,6 @@ public class Procedimento implements Serializable {
 		this.data = data;
 	}
 
-	
-
-	public Integer getPremio() {
-		return premio;
-	}
-
-	public void setPremio(Integer premio) {
-		this.premio = premio;
-	}
-
 	public Integer getTipo() {
 		return tipo;
 	}
@@ -91,8 +77,12 @@ public class Procedimento implements Serializable {
 		this.tipo = tipo;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public Integer getPremio() {
+		return premio;
+	}
+
+	public void setPremio(Integer premio) {
+		this.premio = premio;
 	}
 
 	public String getCodigo() {
@@ -103,16 +93,20 @@ public class Procedimento implements Serializable {
 		this.codigo = codigo;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
 	public Referencia getReferencia() {
 		return referencia;
 	}
 
 	public void setReferencia(Referencia referencia) {
 		this.referencia = referencia;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	@Override

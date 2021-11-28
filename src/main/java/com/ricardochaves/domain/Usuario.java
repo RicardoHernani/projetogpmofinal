@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Usuario implements Serializable {
@@ -17,16 +18,11 @@ public class Usuario implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private String id;
 	
-	
 	private String nome;
-	
-	
 	private String email;
-	
-	
 	private String senha;
 	
-	
+	@OneToMany(mappedBy="usuario")
 	private List<Procedimento> procedimentos = new ArrayList<>();
 	
 	public Usuario() {
