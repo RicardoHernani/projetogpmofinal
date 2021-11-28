@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Procedimento implements Serializable {
@@ -24,11 +25,14 @@ public class Procedimento implements Serializable {
 	private Integer premio;
 	private String codigo;
 	
+	@OneToOne
+	private Referencia referencia;
+	
 	@ManyToOne
 	@JoinColumn(name="usuario_id")
 	private Usuario usuario;
 	
-	private Referencia referencia;
+	
 	
 	public Procedimento() {
 	}
