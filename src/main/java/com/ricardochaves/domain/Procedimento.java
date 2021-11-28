@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Procedimento implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -30,6 +32,7 @@ public class Procedimento implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="usuario_id")
+	@JsonIgnore
 	private Usuario usuario;
 	
 	

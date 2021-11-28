@@ -7,7 +7,6 @@ import com.ricardochaves.domain.Procedimento;
 
 @Repository
 public interface ProcedimentoRepository extends JpaRepository<Procedimento, String>{
-
 	
 	
 
