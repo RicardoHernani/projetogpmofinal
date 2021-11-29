@@ -17,7 +17,7 @@ public class UsuarioService {
 	public Usuario fullSearchIntervalDate(String nomeUsuario, Date dataInicial, Date dataFinal) {
 		dataFinal = new Date(dataFinal.getTime() + 24 * 60 * 60 * 1000);
 		
-		return usuarioRepository.findByNome(nomeUsuario, dataInicial, dataFinal);
+		return usuarioRepository.findByNomeEntreDatas(nomeUsuario, dataInicial, dataFinal);
 	}
 	
 }
