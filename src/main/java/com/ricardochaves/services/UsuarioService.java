@@ -1,8 +1,10 @@
+
 package com.ricardochaves.services;
 
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.ricardochaves.domain.Usuario;
@@ -14,10 +16,9 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
-	public Usuario fullSearchIntervalDate(String nomeUsuario, Date dataInicial, Date dataFinal) {
-		dataFinal = new Date(dataFinal.getTime() + 24 * 60 * 60 * 1000);
-		
-		return usuarioRepository.findByNomeEntreDatas(nomeUsuario, dataInicial, dataFinal);
+	public Page<Usuario> search(String nomeUsuario, Integer page, Integer linesPerPage, String orderBy, String direction) {
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		return usuarioRepository.findByNomeEntreDatas(nomeUsuario, pageRequest);
 	}
 	
 }

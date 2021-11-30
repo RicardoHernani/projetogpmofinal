@@ -1,7 +1,7 @@
 package com.ricardochaves.repositories;
 
-import java.util.Date;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -13,25 +13,7 @@ import com.ricardochaves.domain.Usuario;
 public interface UsuarioRepository extends JpaRepository<Usuario, String> {
 
 	
-	@Query(value = "SELECT * FROM USUARIO INNER JOIN PROCEDIMENTO pro ON USUARIO.ID=USUARIO_ID WHERE USUARIO.nome= :nomeUsuario AND pro.data>= :dataInicial AND pro.data<= :dataFinal", nativeQuery= true)
-	Usuario findByNomeEntreDatas(@Param("nomeUsuario") String nomeUsuario, @Param("dataInicial") Date dataInicial, @Param("dataFinal") Date dataFinal);
+	@Query("SELECT u FROM Usuario u JOIN u.procedimentos p WHERE u.nome= :nomeUsuario AND p.data='2010-12-24'")
+	Page<Usuario> findByNomeEntreDatas(@Param("nomeUsuario") String nomeUsuario, Pageable pageRequest);
 	
 }
-
-
-/*
-
-findByNomeEqualsAndUsuario_ProcedimentofindByDataBetween
-
-@Query(value="SELECT u FROM Usuario u INNER JOIN u.Procedimento p WHERE u.nome= :nomeUsuario AND u.p.data>= :dataInicial AND u.p.data<= :dataFinal")
-
-SELECT * FROM USUARIO, PROCEDIMENTO
-WHERE USUARIO.NOME = 'Ana' AND
-PROCEDIMENTO.DATA >= '2000-02-06' AND
-PROCEDIMENTO.DATA <= '2010-12-26' AND 
-USUARIO.ID  = USUARIO_ID
-
-@Query(value = "SELECT USUARIO.* FROM USUARIO INNER JOIN PROCEDIMENTO pro ON USUARIO.PROCEDIMENTO_ID = pro.ID WHERE USUARIO.nome= :nomeUsuario AND pro.data>= :dataInicial AND pro.data<= :dataFinal", nativeQuery= true)
-
-http://localhost:8080/usuarios/fullsearch?nomeUsuario=Ana&dataInicial=1998-02-06&dataFinal=2009-10-10
-*/

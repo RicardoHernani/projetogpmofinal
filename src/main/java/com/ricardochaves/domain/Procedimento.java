@@ -1,6 +1,7 @@
 package com.ricardochaves.domain;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -22,7 +23,7 @@ public class Procedimento implements Serializable {
 	private String id;
 	
 	private Integer matricula;
-	private Date data;
+	private LocalDate data;
 	private Integer tipo;
 	private Integer premio;
 	private String codigo;
@@ -40,7 +41,7 @@ public class Procedimento implements Serializable {
 	public Procedimento() {
 	}
 
-	public Procedimento(String id, Integer matricula, Date data, Integer tipo, Integer premio, String codigo, Referencia referencia, Usuario usuario) {
+	public Procedimento(String id, Integer matricula, LocalDate data, Integer tipo, Integer premio, String codigo, Referencia referencia, Usuario usuario) {
 		super();
 		this.id = id;
 		this.matricula = matricula;
@@ -68,11 +69,11 @@ public class Procedimento implements Serializable {
 		this.matricula = matricula;
 	}
 
-	public Date getData() {
+	public LocalDate getData() {
 		return data;
 	}
 
-	public void setData(Date data) {
+	public void setData(LocalDate data) {
 		this.data = data;
 	}
 
