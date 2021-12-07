@@ -7,8 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Procedimento implements Serializable {
@@ -27,11 +30,15 @@ public class Procedimento implements Serializable {
 	private Integer premio;
 	private Integer codigo;
 	
+	@ManyToOne
+	@JoinColumn(name="usuario_Id")
+	@JsonIgnore
+	private Usuario usuario;
 	
 	public Procedimento() {
 	}
 
-	public Procedimento(Integer id, Integer matricula, Date data, Integer tipo, Integer premio, Integer codigo) {
+	public Procedimento(Integer id, Integer matricula, Date data, Integer tipo, Integer premio, Integer codigo, Usuario usuario) {
 		super();
 		this.id = id;
 		this.matricula = matricula;
@@ -39,6 +46,7 @@ public class Procedimento implements Serializable {
 		this.tipo = tipo;
 		this.premio = premio;
 		this.codigo = codigo;
+		this.usuario = usuario;
 		
 	}
 	
@@ -89,6 +97,16 @@ public class Procedimento implements Serializable {
 	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
 	}
+	
+	
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 
 	@Override
 	public int hashCode() {
@@ -114,5 +132,6 @@ public class Procedimento implements Serializable {
 			return false;
 		return true;
 	}
+
 	
 }
