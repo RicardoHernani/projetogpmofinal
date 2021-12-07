@@ -4,14 +4,15 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Procedimento implements Serializable {
@@ -30,9 +31,9 @@ public class Procedimento implements Serializable {
 	private Integer premio;
 	private Integer codigo;
 	
-	@ManyToOne
-	@JoinColumn(name="usuario_Id")
-	@JsonIgnore
+	@JsonBackReference  //Pode trocar por @JsonIgnore e apagar o @JsonManagedReference do Usuario
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="usuario_id")
 	private Usuario usuario;
 	
 	public Procedimento() {

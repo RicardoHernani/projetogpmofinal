@@ -1,14 +1,17 @@
 package com.ricardochaves.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Usuario implements Serializable {
@@ -22,8 +25,10 @@ public class Usuario implements Serializable {
 	private String email;
 	private String senha;
 	
+	
+	@JsonManagedReference
 	@OneToMany(mappedBy="usuario")
-	private List<Procedimento> procedimentos = new ArrayList<>();
+	private Set<Procedimento> procedimentos = new HashSet<Procedimento>();
 	
 	public Usuario() {
 	}
@@ -68,11 +73,12 @@ public class Usuario implements Serializable {
 		this.senha = senha;
 	}
 	
-	public List<Procedimento> getProcedimentos() {
+	
+	public Set<Procedimento> getProcedimentos() {
 		return procedimentos;
 	}
 
-	public void setProcedimentos(List<Procedimento> procedimentos) {
+	public void setProcedimentos(Set<Procedimento> procedimentos) {
 		this.procedimentos = procedimentos;
 	}
 

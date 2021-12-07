@@ -48,6 +48,12 @@ public class ProjetogpmofinalApplication implements CommandLineRunner{
 		Procedimento pro9 = new Procedimento(null, 55555555, sdf.parse("1998-05-13"), 1, 2, 31201113, usu3);
 		Procedimento pro10 = new Procedimento(null, 66666666, sdf.parse("2019-06-27"), 1, 2, 30908027, usu3);
 		
+		usu1.getProcedimentos().addAll(Arrays.asList(pro1, pro2, pro3));
+		usu2.getProcedimentos().addAll(Arrays.asList(pro4, pro5));
+		usu3.getProcedimentos().addAll(Arrays.asList(pro6, pro7, pro8, pro9, pro10));
+		
+		
+		
 		procedimentoRepository.saveAll(Arrays.asList(pro1, pro2, pro3, pro4, pro5, pro6, pro7, pro8, pro9, pro10));	
 		
 	}

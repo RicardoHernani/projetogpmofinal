@@ -11,6 +11,6 @@ import com.ricardochaves.domain.Usuario;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
 
-	@Query("select u from Usuario u")
+	@Query("select distinct u from Usuario u join u.procedimentos p where u.id=1")
 	List<Usuario> achar();
 }
