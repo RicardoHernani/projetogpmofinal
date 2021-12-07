@@ -1,47 +1,37 @@
 package com.ricardochaves.domain;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class Procedimento implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private String id;
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Integer id;
 	
 	private Integer matricula;
-	private LocalDate data;
+	
+	@JsonFormat(pattern="yyyy-MM-dd")
+	private Date data;
+	
 	private Integer tipo;
 	private Integer premio;
-	private String codigo;
-	
-	@OneToOne
-	private Referencia referencia;
-	
-	@ManyToOne
-	@JoinColumn(name="usuario_id")
-	@JsonIgnore
-	private Usuario usuario;
-	
+	private Integer codigo;
 	
 	
 	public Procedimento() {
 	}
 
-	public Procedimento(String id, Integer matricula, LocalDate data, Integer tipo, Integer premio, String codigo, Referencia referencia, Usuario usuario) {
+	public Procedimento(Integer id, Integer matricula, Date data, Integer tipo, Integer premio, Integer codigo) {
 		super();
 		this.id = id;
 		this.matricula = matricula;
@@ -49,15 +39,14 @@ public class Procedimento implements Serializable {
 		this.tipo = tipo;
 		this.premio = premio;
 		this.codigo = codigo;
-		this.referencia = referencia;
-		this.usuario = usuario;
+		
 	}
 	
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -69,11 +58,11 @@ public class Procedimento implements Serializable {
 		this.matricula = matricula;
 	}
 
-	public LocalDate getData() {
+	public Date getData() {
 		return data;
 	}
 
-	public void setData(LocalDate data) {
+	public void setData(Date data) {
 		this.data = data;
 	}
 
@@ -93,28 +82,12 @@ public class Procedimento implements Serializable {
 		this.premio = premio;
 	}
 
-	public String getCodigo() {
+	public Integer getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(String codigo) {
+	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
-	}
-
-	public Referencia getReferencia() {
-		return referencia;
-	}
-
-	public void setReferencia(Referencia referencia) {
-		this.referencia = referencia;
-	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
 	}
 
 	@Override
